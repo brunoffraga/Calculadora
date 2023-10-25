@@ -30,10 +30,11 @@ public class Calculadora {
         this.numeroA = dados.numeroA();
         this.numeroB = dados.numeroB();
         this.simbolos = dados.simbolos();
-        this.total = dados.total();
+        this.total = calcular(dados.numeroA(), dados.numeroB(), dados.simbolos());
     }
 
     public void atualizarInfomacoes(DadosAtualizacaoCalculadora dados){
+
         if(dados.numeroA() != null){
             this.numeroA = dados.numeroA();
         }
@@ -43,9 +44,8 @@ public class Calculadora {
         if(dados.simbolos() != null){
             this.simbolos = dados.simbolos();
         }
-        if(dados.total() != null){
-            this.total = dados.total();
-        }
+        this.total = calcular(dados.numeroA(), dados.numeroB(), dados.simbolos());
+
     }
 
     public void excluir(Long id){
@@ -54,6 +54,23 @@ public class Calculadora {
     
     public void ativar(Long id){
         this.ativo = true;
+    }
+
+    public Double calcular(Double numeroA, Double numeroB, String simbolo){
+        
+        if(simbolo.equals("-")){
+            total = numeroA - numeroB;
+        }
+        if(simbolo.equals("+")){
+            total = numeroA + numeroB;
+        }
+        if(simbolo.equals("/")){
+            total = numeroA / numeroB;
+        }
+        if(simbolo.equals("*")){
+            total = numeroA * numeroB;
+        }
+        return total;
     }
     
 }

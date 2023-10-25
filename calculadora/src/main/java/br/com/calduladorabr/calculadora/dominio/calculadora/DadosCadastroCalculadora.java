@@ -12,10 +12,7 @@ public record DadosCadastroCalculadora(
     Double numeroB,
 
     @NotBlank
-    String simbolos,
-
-    @NotNull
-    Double total
+    String simbolos
     
 ) {
 

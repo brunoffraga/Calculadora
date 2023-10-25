@@ -10,8 +10,6 @@ public record DadosAtualizacaoCalculadora (
     
     Double numeroB,
 
-    String simbolos,
-
-    Double total){
+    String simbolos){
         
 }
