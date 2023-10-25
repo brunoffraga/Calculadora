@@ -23,6 +23,7 @@ public class Calculadora {
     Double numeroB;
     Double total;
     String simbolos;
+    
     Boolean ativo;
 
     public Calculadora(DadosCadastroCalculadora dados){
@@ -33,7 +34,7 @@ public class Calculadora {
         this.total = calcular(dados.numeroA(), dados.numeroB(), dados.simbolos());
     }
 
-    public void atualizarInfomacoes(DadosAtualizacaoCalculadora dados){
+    public void atualizar(DadosAtualizacaoCalculadora dados){
 
         if(dados.numeroA() != null){
             this.numeroA = dados.numeroA();
@@ -60,14 +61,11 @@ public class Calculadora {
         
         if(simbolo.equals("-")){
             total = numeroA - numeroB;
-        }
-        if(simbolo.equals("+")){
+        } else if(simbolo.equals("+")){
             total = numeroA + numeroB;
-        }
-        if(simbolo.equals("/")){
+        } else if(simbolo.equals("/")){
             total = numeroA / numeroB;
-        }
-        if(simbolo.equals("*")){
+        } else if(simbolo.equals("*")){
             total = numeroA * numeroB;
         }
         return total;

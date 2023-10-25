@@ -3,7 +3,8 @@ package br.com.calduladorabr.calculadora.dominio.calculadora;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoCalculadora (
-    @NotNull
+    
+@NotNull
     Long id,
 
     Double numeroA,

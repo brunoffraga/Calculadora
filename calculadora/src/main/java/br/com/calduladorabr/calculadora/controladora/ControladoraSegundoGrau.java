@@ -9,45 +9,45 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.calduladorabr.calculadora.dominio.calculadora.*;
+import br.com.calduladorabr.calculadora.dominio.segundograu.*;
 
 @RestController
-@RequestMapping("/calculadora")
-public class ControladoraCalculadora {
-
+@RequestMapping("/segundoGrau")
+public class ControladoraSegundoGrau {
+        
     @Autowired
-    private RepositorioCalculadora repository;
+    private RepositorioSegundoGru repository;
     
     @PostMapping
     @Transactional
-    public ResponseEntity cadastro(@RequestBody @Valid DadosCadastroCalculadora dados, UriComponentsBuilder uriComponentsBuilder){
-        var calculadora = new Calculadora(dados);
+    public ResponseEntity cadastro(@RequestBody @Valid DadosCadastroSegundoGrau dados, UriComponentsBuilder uriComponentsBuilder){
+        var calculadora = new Segundograu(dados);
         repository.save(calculadora);
 
-        var uri = uriComponentsBuilder.path("/calculadora/{id}").buildAndExpand(calculadora.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/segundograu/{id}").buildAndExpand(calculadora.getId()).toUri();
         
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoAtualizadoCalculadora(calculadora));
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoAtualizadoSegundoGrau(calculadora));
     }
 
     @GetMapping("/Lista")
-    public ResponseEntity<Page<DadosListagemCalculo>> lista(@PageableDefault(size = 10, sort={"id"}) Pageable pageable) {
-        var page = repository.findAllByAtivoTrue(pageable).map(DadosListagemCalculo::new);
+    public ResponseEntity<Page<DadosListagemSegundoGrau>> lista(@PageableDefault(size = 10, sort={"id"}) Pageable pageable) {
+        var page = repository.findAllByAtivoTrue(pageable).map(DadosListagemSegundoGrau::new);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/Lista/Deletados")
-    public ResponseEntity<Page<DadosListagemCalculo>> listaDeletada(@PageableDefault(size = 10, sort={"id"}) Pageable pageable) {
-        var page = repository.findAllByAtivoFalse(pageable).map(DadosListagemCalculo::new);
+    public ResponseEntity<Page<DadosListagemSegundoGrau>> listaDeletada(@PageableDefault(size = 10, sort={"id"}) Pageable pageable) {
+        var page = repository.findAllByAtivoFalse(pageable).map(DadosListagemSegundoGrau::new);
         return ResponseEntity.ok(page);
     }
 
     @PutMapping
     @Transactional
-    public ResponseEntity autualizar(@RequestBody @Valid DadosAtualizacaoCalculadora dados) {
+    public ResponseEntity autualizar(@RequestBody @Valid DadosAtualizacaoSegundoGrau dados) {
         var calculadora = repository.getReferenceById(dados.id());
         calculadora.atualizar(dados);
 
-        return ResponseEntity.ok(new DadosDetalhamentoAtualizadoCalculadora(calculadora));
+        return ResponseEntity.ok(new DadosDetalhamentoAtualizadoSegundoGrau(calculadora));
     }
 
     @DeleteMapping("/{id}")
@@ -69,10 +69,9 @@ public class ControladoraCalculadora {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity detalhamentoCalculo(@PathVariable long id){
+    public ResponseEntity detalhamentoSegundograu(@PathVariable long id){
         var calculadora = repository.getReferenceById(id);
 
-        return ResponseEntity.ok(new DadosDetalhamentoAtualizadoCalculadora(calculadora));
+        return ResponseEntity.ok(new DadosDetalhamentoAtualizadoSegundoGrau(calculadora));
     }
-    
 }
