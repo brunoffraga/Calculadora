@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotNull;
 public record DadosCadastroSegundoGrau (
     
     @NotNull
-    Float a,
+    float a,
 
     @NotNull
-    Float b,
+    float b,
 
     @NotNull
-    Float c
+    float c
     
 ){
 

@@ -4,8 +4,11 @@ create table segundograu(
     ativo tinyint not null,
     numeroA float not null,
     numeroB float not null,
-    simbolos varchar(1) not null,
-    total float not null,
+    raiz1 float,
+    raiz2 float,
+    delta float,
+    sqrtdelta float,
+    total float,
 
     primary key(id)
 

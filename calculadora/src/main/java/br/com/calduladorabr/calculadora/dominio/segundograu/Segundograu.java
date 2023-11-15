@@ -19,13 +19,15 @@ public class Segundograu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    Float a;
-    Float b;
-    Float c;
-    Float raiz1;
-    Float raiz2;
-    Float delta;
+    float a;
+    float b;
+    float c;
+    float raiz1;
+    float raiz2;
+    float delta;
     float sqrtdelta;
+    
+    String erro;
 
     Boolean ativo;
 
@@ -37,10 +39,14 @@ public class Segundograu {
     }
 
     public void atualizar(DadosAtualizacaoSegundoGrau dados){
-        this.a = dados.a();
-        this.b = dados.b();
-        this.c = dados.c();
-        calcular(dados.a(), dados.b(), dados.c());
+        if (a != 0) {
+            this.a = dados.a();
+            this.b = dados.b();
+            this.c = dados.c();
+            calcular(dados.a(), dados.b(), dados.c());
+        }else {
+            this.erro = "Coeficiente 'a' inválido. Não é uma equação do 2 do grau";
+        }
     }
 
     public void excluir(Long id){
@@ -51,30 +57,26 @@ public class Segundograu {
         this.ativo = true;
     }
 
-    private void calcular(Float a2, Float b2, Float c2) {
-        if(a != 0){
-
-            //O valor de delta e calcula a raiz quadrada
-            delta = (b*b) - (4*a*c);
-            sqrtdelta = (float)Math.sqrt(delta);
+    private void calcular(float a, float b, float c) {
+        //O valor de delta e calcula a raiz quadrada
+        this.delta = (b*b) - (4*a*c);
+        this.sqrtdelta = (float)Math.sqrt(delta);
+        
+        //se a raiz de delta for maior que 0, as raízes são reais    
+        if(delta >= 0){
+            this.raiz1 = ((-1)*b + sqrtdelta)/(2*a);
+            this.raiz2 = ((-1)*b - sqrtdelta)/(2*a);
+            System.out.println("raiz1 = " + raiz1);
+            System.out.println("raiz2 = " + raiz2);
+        }
+        //se delta for menor que 0, as raízes serão complexas
+        else{
+            this.delta = -delta;
+            this.sqrtdelta = (float)Math.sqrt(delta);
+            System.out.printf("Raíz 1: %.2f + i.%.2f\n", (-b)/(2*a), (sqrtdelta)/(2*a));
+            System.out.printf("Raíz 2: %.2f - i.%.2f\n", (-b)/(2*a), (sqrtdelta)/(2*a));
             
-            //se a raiz de delta for maior que 0, as raízes são reais    
-            if(delta >=0){
-                raiz1 = ((-1)*b + sqrtdelta)/(2*a);
-                raiz2 = ((-1)*b - sqrtdelta)/(2*a);
-                System.out.printf("Raízes: %.2f e %.2f", raiz1, raiz2);
-            }
-            //se delta for menor que 0, as raízes serão complexas
-            else{
-                delta = -delta;
-                sqrtdelta = (float)Math.sqrt(delta);
-                System.out.printf("Raíz 1: %.2f + i.%.2f\n", (-b)/(2*a), (sqrtdelta)/(2*a));
-                System.out.printf("Raíz 2: %.2f - i.%.2f\n", (-b)/(2*a), (sqrtdelta)/(2*a));
-                
-            }
-                
-        } else {
-            System.out.println("Coeficiente 'a' inválido. Não é uma equação do 2o grau");
-        }        
+        }  
+            
     }
 }
