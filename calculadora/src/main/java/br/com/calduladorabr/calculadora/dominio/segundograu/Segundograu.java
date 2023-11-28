@@ -32,14 +32,18 @@ public class Segundograu {
     Boolean ativo;
 
     public Segundograu(DadosCadastroSegundoGrau dados){
-        this.a = dados.a();
-        this.b = dados.b();
-        this.c = dados.c();
-        calcular(dados.a(), dados.b(), dados.c());
+        if (dados.a() != 0) {
+            this.a = dados.a();
+            this.b = dados.b();
+            this.c = dados.c();
+            calcular(dados.a(), dados.b(), dados.c());
+        }else {
+            this.erro = "Coeficiente 'a' inválido. Não é uma equação do 2 do grau";
+        }
     }
 
     public void atualizar(DadosAtualizacaoSegundoGrau dados){
-        if (a != 0) {
+        if (dados.a() != 0) {
             this.a = dados.a();
             this.b = dados.b();
             this.c = dados.c();
