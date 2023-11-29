@@ -26,6 +26,7 @@ public class Calculadora {
     
     Boolean ativo;
 
+    //pega os dados da validação e cadastra tudo no banco de dados.
     public Calculadora(DadosCadastroCalculadora dados){
         this.ativo = true;
         this.numeroA = dados.numeroA();

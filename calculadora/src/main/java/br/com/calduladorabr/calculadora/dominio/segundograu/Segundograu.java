@@ -18,6 +18,7 @@ public class Segundograu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    Boolean ativo;
 
     float a;
     float b;
@@ -28,8 +29,6 @@ public class Segundograu {
     float sqrtdelta;
     
     String erro;
-
-    Boolean ativo;
 
     public Segundograu(DadosCadastroSegundoGrau dados){
         if (dados.a() != 0) {

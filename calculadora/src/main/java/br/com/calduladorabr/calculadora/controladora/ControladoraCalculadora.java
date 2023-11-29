@@ -18,6 +18,8 @@ public class ControladoraCalculadora {
     @Autowired
     private RepositorioCalculadora repository;
     
+
+    //Aqui joga para o recod validar se está tudo certo
     @PostMapping
     @Transactional
     public ResponseEntity cadastro(@RequestBody @Valid DadosCadastroCalculadora dados, UriComponentsBuilder uriComponentsBuilder){
